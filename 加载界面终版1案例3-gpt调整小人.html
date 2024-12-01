@@ -1,0 +1,137 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Game Loading Screen</title>
+    <style>
+        /* 页面基础样式 */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #458B74;
+            color: white;
+            text-align: center;
+            padding: 50px;
+        }
+        /* 加载标题 */
+        h1 {
+            font-size: 2.5em;
+            margin-bottom: 20px;
+        }
+        /* 进度条容器 */
+        .progress-container {
+            width: 80%;
+            background-color: #F0FFF0;
+            border-radius: 25px;
+            margin: 0 auto;
+            overflow: hidden;
+            position: relative;
+            height: 50px; /* 增加高度，方便小人展示 */
+        }
+        /* 进度条 */
+        .progress-bar {
+            width: 0;
+            height: 100%;
+            background-color: #9BCD9B;
+            border-radius: 25px;
+            position: relative;
+        }
+        /* 小人图标样式 */
+        .running-man {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 70px; /* 调整小人大小 */
+            height: auto;
+            transition: left 0.25s linear; /* 小人位置平滑移动 */
+        }
+        /* 加载文字 */
+        .loading-text {
+            margin-top: 15px;
+            font-size: 1.2em;
+        }
+        /* 按钮样式 */
+        .start-button, .back-button {
+            display: none; /* 初始隐藏 */
+            opacity: 0;
+            visibility: hidden;
+            margin-top: 20px;
+            padding: 10px 20px;
+            font-size: 1.2em;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease, visibility 0.5s ease;
+        }
+
+            .start-button:hover, .back-button:hover {
+                background-color: #45a049;
+            }
+
+            .start-button.visible, .back-button.visible {
+                opacity: 1;
+                visibility: visible;
+                display: inline-block;
+            }
+    </style>
+</head>
+<body>
+    <h1>Loading Game...</h1>
+    <div class="progress-container">
+        <div class="progress-bar" id="progress-bar">
+            <!-- 小人图标 -->
+            <img src="running-man.gif" alt="Running Man" class="running-man" id="running-man" />
+        </div>
+    </div>
+    <div class="loading-text" id="loading-text">0%</div>
+    <button class="start-button" id="start-button" onclick="startGame()">Start Game</button>
+    <!-- 新添加的返回按钮 -->
+    <button class="back-button" id="back-button" onclick="goBack()">Back</button>
+
+    <script>
+        // 模拟加载进度
+        let progress = 0;
+        const progressBar = document.getElementById('progress-bar');
+        const loadingText = document.getElementById('loading-text');
+        const startButton = document.getElementById('start-button');
+        const backButton = document.getElementById('back-button');
+        const runningMan = document.getElementById('running-man');
+
+        function updateProgress() {
+            progress += 5;
+            if (progress <= 100) {
+                // 更新进度条宽度
+                progressBar.style.width = progress + '%';
+
+                // 更新小人的位置
+                const progressContainerWidth = document.querySelector('.progress-container').offsetWidth;
+                const manWidth = runningMan.offsetWidth;
+                const newLeft = (progressContainerWidth - manWidth) * (progress / 100); // 小人的新位置
+                runningMan.style.left = newLeft + 'px';
+
+                // 更新加载文字
+                loadingText.textContent = progress + '%';
+            } else {
+                clearInterval(progressInterval);
+                loadingText.textContent = "Loaded finished!";
+                startButton.classList.add('visible');
+                backButton.classList.add('visible');
+            }
+        }
+
+        const progressInterval = setInterval(updateProgress, 250); // 每250ms更新一次
+
+        // 定义跳转到下一个画面的函数
+        function startGame() {
+            window.location.href = "next.html";
+        }
+
+        // 返回按钮的功能，跳转到上一个页面
+        function goBack() {
+            window.location.href = "index.html"; // 假设这是返回的页面路径
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,77 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Game Menu</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #458B74;
+            color: white;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+        }
+
+        #game-menu {
+            margin-top: 100px;
+        }
+
+        h1 {
+            font-size: 3rem;
+        }
+
+        ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        li {
+            margin: 40px 0;
+        }
+
+        a {
+            text-decoration: none;
+            font-size: 1.5rem;
+            color: white;
+            padding: 10px 20px;
+            border: 2px solid white;
+            border-radius: 5px;
+            transition: background 0.3s, color 0.3s;
+        }
+
+            a:hover {
+                background: white;
+                color: #1e3c72;
+            }
+    </style>
+</head>
+
+<body>
+    <div id="game-menu">
+        <h1>Welcome to the Game</h1>
+        <ul>
+            <li><a href="#" onclick="startGame()">Start Game</a></li>
+            <li><a href="#" onclick="openSettings()">Settings</a></li>
+            <li><a href="#" onclick="exitGame()">Exit</a></li>
+        </ul>
+    </div>
+
+    <script>
+        // 页面跳转到游戏页面
+        function startGame() {
+            // 跳转到你写的另一个HTML页面
+            window.location.href = "加载界面终版1案例3-gpt调整小人.html";  // 假设 game.html 是你写的游戏页面
+        }
+
+        function openSettings() {
+            alert("Settings Menu...");
+        }
+
+        function exitGame() {
+            alert("Exiting Game...");
+        }
+    </script>
+</body>
+</html>
